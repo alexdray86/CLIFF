@@ -2,10 +2,15 @@ import numpy as np
 import pandas as pd
 import scipy
 import random
+import math
 import sklearn
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from scipy.stats import spearmanr, pearsonr
+from cliff.utils import sigmoid, rmse
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x) )
 
 class Cliff:
     """
