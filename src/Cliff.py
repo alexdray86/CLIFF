@@ -176,7 +176,7 @@ class Cliff_CV:
             Y_train = Y[~sel_test,:].copy()
             Y_test  = Y[sel_test,:].copy()
             
-            # Launch EM algorithm and recover expections
+            # Launch EM algorithm and recover predictions
             DC_train = DataContainer(S_df.copy(), S.copy(), W_train, Y_train, n_dose=self.cliff_obj.DC.n_dose)
 
             # Build EM launcher and define n_iter
