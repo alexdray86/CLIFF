@@ -546,17 +546,17 @@ code.descname {
 
 .sig.c   .k, .sig.c   .kt,
 .sig.cpp .k, .sig.cpp .kt {
-	color: #0033B3;
+	color: #ab0707;
 }
 
 .sig.c   .m,
 .sig.cpp .m {
-	color: #1750EB;
+	color: #ab0707;
 }
 
 .sig.c   .s, .sig.c   .sc,
 .sig.cpp .s, .sig.cpp .sc {
-	color: #067D17;
+	color: #ab0707;
 }
 
 
