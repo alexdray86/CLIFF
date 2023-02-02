@@ -6,3 +6,7 @@
   --pst-font-size-base: 30px;
 }
 
+a:visited {
+  color: blue;
+}
+
