@@ -1,27 +1,22 @@
 Installation
 ____________
 
-Warning : you need to have git lfs ! To install it :
+**Install CLIFF from GitHub**
 
-``brew install git-lfs``
+Go to the desired folder where you want to install CLIFF and launch
 
-**Install pyTEnrich from source**
+``git clone https://github.com/alexdray86/CLIFF.git``
 
-Go to the desired folder where you want to install TEnrich and launch
+**Build a python environment**
 
-``git clone ssh://git@c4science.ch/diffusion/11057/pytenrich.git``
+The best is to create a python environment to install all dependencies in it.
 
-You need to have access to LVG group on c4science.
-
-**Using a python environment**
-
-``python3 -m venv pyTEnrich-env``
+``python3 -m venv cliff-env``
 
 activate python environment
 
-``source pyTEnrich-env/bin/activate``
+``source cliff-env/bin/activate``
 
-Install all dependencies in pyTEnrich-env using `requirements.txt` file
+Install all dependencies in cliff-env using `requirements.txt` file
 
 ``python3 -m pip install -r requirements.txt``
-

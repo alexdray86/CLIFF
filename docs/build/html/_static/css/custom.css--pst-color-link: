@@ -1,0 +1,4 @@
+:root {
+    --pst-color-link: 0, 91, 129;
+    --pst-color-link-hover: 227, 46, 0;
+}

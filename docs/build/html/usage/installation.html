@@ -7,6 +7,7 @@
   <title>Installation &mdash; Cliff 0.6 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -44,12 +45,9 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">Execution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="detailmethods.html">Detailed methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="genome_subset.html">Using a genome subset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="otherspecies.html">Working with other species</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis_ex.html">Analysis example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/pyTEnrich.html">pyTEnrich class &amp; functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Detailed methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/CLIFF.html">CLIFF class &amp; functions</a></li>
 </ul>
 
         </div>
@@ -78,17 +76,15 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
-<p>Warning : you need to have git lfs ! To install it :</p>
-<p><code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">git-lfs</span></code></p>
-<p><strong>Install pyTEnrich from source</strong></p>
-<p>Go to the desired folder where you want to install TEnrich and launch</p>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">ssh://git&#64;c4science.ch/diffusion/11057/pytenrich.git</span></code></p>
-<p>You need to have access to LVG group on c4science.</p>
-<p><strong>Using a python environment</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">pyTEnrich-env</span></code></p>
+<p><strong>Install CLIFF from GitHub</strong></p>
+<p>Go to the desired folder where you want to install CLIFF and launch</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/alexdray86/CLIFF.git</span></code></p>
+<p><strong>Build a python environment</strong></p>
+<p>The best is to create a python environment to install all dependencies in it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">cliff-env</span></code></p>
 <p>activate python environment</p>
-<p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">pyTEnrich-env/bin/activate</span></code></p>
-<p>Install all dependencies in pyTEnrich-env using <cite>requirements.txt</cite> file</p>
+<p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">cliff-env/bin/activate</span></code></p>
+<p>Install all dependencies in cliff-env using <cite>requirements.txt</cite> file</p>
 <p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p>
 </section>
 
@@ -120,7 +116,15 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>  
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #ab0707;
+    }
+  </style>
+
 
 </body>
 </html>

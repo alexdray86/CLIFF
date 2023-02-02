@@ -7,6 +7,7 @@
   <title>Execution &mdash; Cliff 0.6 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -20,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Output" href="output.html" />
+    <link rel="next" title="Detailed methods" href="detailmethods.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
@@ -44,12 +45,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Execution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="detailmethods.html">Detailed methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="genome_subset.html">Using a genome subset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="otherspecies.html">Working with other species</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis_ex.html">Analysis example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/pyTEnrich.html">pyTEnrich class &amp; functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Detailed methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/CLIFF.html">CLIFF class &amp; functions</a></li>
 </ul>
 
         </div>
@@ -78,46 +76,13 @@
              
   <section id="execution">
 <h1>Execution<a class="headerlink" href="#execution" title="Permalink to this heading"></a></h1>
-<p><strong>How to get help</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">pyTEnrich.py</span> <span class="pre">-h</span></code></p>
-<p><strong>Run pyTEnrich</strong></p>
-<p>For now, the script needs to be launched inside its directory, the executable
-cannot be moved. To be improved in next versions.</p>
-<p>usage:
-<code class="docutils literal notranslate"><span class="pre">pyTEnrich.py</span> <span class="pre">[-h]</span> <span class="pre">[-i</span> <span class="pre">IN_DIR]</span> <span class="pre">[-o</span> <span class="pre">OUT_DIR]</span> <span class="pre">[-X</span> <span class="pre">optional</span> <span class="pre">parameters]</span></code></p>
-<p><em>Required parameters</em></p>
-<dl class="option-list">
-<dt><kbd><span class="option">-i <var>IN_DIR</var></span>, <span class="option">--in_dir <var>IN_DIR</var></span></kbd></dt>
-<dd><p>Input directory containing bed files. Only files with *.bed extension in this folder will be used</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_DIR</var></span>, <span class="option">--out_dir <var>OUT_DIR</var></span></kbd></dt>
-<dd><p>Output directory where to write results</p>
-</dd>
-</dl>
-<p><em>Optional parameters</em></p>
-<dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-s <var>SIZE_GENOME</var></span>, <span class="option">--size_genome <var>SIZE_GENOME</var></span></kbd></dt>
-<dd><p>Genome size (in bp). If a genome subset is provided, it will re-calculate genome size and erase this.</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GENOME_SUBSET</var></span>, <span class="option">--genome_subset <var>GENOME_SUBSET</var></span></kbd></dt>
-<dd><p>Bed file representing a subset of the genome on which we wish to compute the enrichment.</p>
-</dd>
-<dt><kbd><span class="option">-t <var>TE_DB</var></span>, <span class="option">--te_db <var>TE_DB</var></span></kbd></dt>
-<dd><p>Transposable Element database. The subfamily/family name should agree with idx_fam/idx_sfam parameters.</p>
-</dd>
-<dt><kbd><span class="option">-n <var>N_CPU</var></span>, <span class="option">--n_cpu <var>N_CPU</var></span></kbd></dt>
-<dd><p>Number of CPU to use for multi-processing</p>
-</dd>
-<dt><kbd><span class="option">--idx_fam <var>IDX_FAM</var></span></kbd></dt>
-<dd><p>Field number corresponding to the column index of TE family name. By default, idx_fam = 6. WARNING : 0-based, ‘1’ means 2nd column.</p>
-</dd>
-<dt><kbd><span class="option">--idx_sfam <var>IDX_SFAM</var></span></kbd></dt>
-<dd><p>Field number corresponding to the column index of TE subfamily name. By default, idx_sfam = 7. WARNING : 0-based, ‘1’ means 2nd column.</p>
-</dd>
-</dl>
+<p><strong>Run CLIFF</strong></p>
+<p>The easiest is to use a jupyter notebook at the root of CLIFF folder and load all functions as shown in <cite>cliff_example_invitro.ipynb</cite>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">cliff.Cliff</span> <span class="pre">import</span> <span class="pre">Cliff,</span> <span class="pre">Cliff_CV</span>
+<span class="pre">from</span> <span class="pre">cliff.DataContainer</span> <span class="pre">import</span> <span class="pre">DataContainer</span>
+<span class="pre">from</span> <span class="pre">cliff.utils</span> <span class="pre">import</span> <span class="pre">sigmoid,</span> <span class="pre">rmse</span></code></p>
+<p>don’t forget to import all required libraries.</p>
+<p>For help about input / output of cliff functions, visit the class/function page.</p>
 </section>
 
 
@@ -125,7 +90,7 @@ cannot be moved. To be improved in next versions.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="output.html" class="btn btn-neutral float-right" title="Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="detailmethods.html" class="btn btn-neutral float-right" title="Detailed methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -148,7 +113,15 @@ cannot be moved. To be improved in next versions.</p>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>  
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #ab0707;
+    }
+  </style>
+
 
 </body>
 </html>
