@@ -17,10 +17,11 @@
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Detailed methods" href="results.html" />
+    <link rel="next" title="Examples of CLIFF results" href="results.html" />
     <link rel="prev" title="Execution" href="execution.html" /> 
 </head>
 
@@ -30,7 +31,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="../index.html">
-            <img src="../_static/logo1.png" class="logo" alt="Logo"/>
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -45,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">Execution</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Detailed methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">Detailed methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Examples of CLIFF results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/CLIFF.html">CLIFF class &amp; functions</a></li>
 </ul>
 
@@ -76,8 +77,33 @@
   <section id="detailed-methods">
 <span id="detailmethods"></span><h1>Detailed methods<a class="headerlink" href="#detailed-methods" title="Permalink to this heading"></a></h1>
 <p><strong>Mathematical Modelling of Cell-Type-Specific Drug Sensitivity</strong></p>
+<p>We assume a cell <strong>c</strong> has two possible outcomes when exposed to a drug <strong>d</strong>:</p>
 <img alt="../_images/cliff_schemes1.png" src="../_images/cliff_schemes1.png" />
-<img alt="../_images/cliff_schemes2.png" src="../_images/cliff_schemes2.png" />
+<p>If we sum up the probability to survive for each cells we can get the following likelihood function :</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L} = \sum_{c=1}^C \delta_{cd} \cdot log P(\delta_{cd} = 1) + ( 1 - \delta_{cd} ) \cdot log ( 1 - P (\delta_{cd}) )\]</div>
+<p><strong>Problem1</strong>: we cannot directly observe  <span class="math notranslate nohighlight">\(\delta_{cd}\)</span>. Indeed, drug sensitivity assay is limited to a bulk measurement!</p>
+<img alt="../_images/cliff_schemes2a.png" src="../_images/cliff_schemes2a.png" />
+<p><strong>Problem 2</strong>: we have <strong>K</strong> heterogeneous population of cells in the mixture subjected to a drug sensitivity assay, with varying survival rates:  <span class="math notranslate nohighlight">\(\pi_{dk} = P(\delta_{cd}^{(k)} = 1)\)</span>.</p>
+<img alt="../_images/cliff_schemes2b.png" src="../_images/cliff_schemes2b.png" />
+<p><strong>CLIFF - Cell fate inference for drug sensitivity deconvolution</strong></p>
+<p>Here we propose to infer the drug sensitivity of individual cell subtypes using only drug sensitivity data observed on mixed cell populations, considering  <span class="math notranslate nohighlight">\(K\)</span> different cell populations in  <span class="math notranslate nohighlight">\(N\)</span> mixed samples, with proportions than can be defined as  <span class="math notranslate nohighlight">\(\mathbf{w}_n = [w_{n1}, ..., w_{nK}]\)</span>, with  <span class="math notranslate nohighlight">\(w_{nk} \in [0,1]\)</span> and <span class="math notranslate nohighlight">\(\sum_{k=1}^K w_{nk} = 1\)</span>. Drug sensitivity observed in the bulk samples we wish to demix are represented by a matrix <span class="math notranslate nohighlight">\(\mathbf{Y}^{N\times D}\)</span>, with <span class="math notranslate nohighlight">\(y_{nd} \in [0,1]\)</span> being the empirical surviving rate of cells, for sample <span class="math notranslate nohighlight">\(n\)</span> and drug concentration <span class="math notranslate nohighlight">\(d\)</span>. Therefore the target matrix we wish to predict is <span class="math notranslate nohighlight">\(\hat{\mathbf{Y}}^{N\times D}\)</span>, and the predicted values of drug sensitivity is assumed to depend on the underlying drug sensitivity of cell subtypes <span class="math notranslate nohighlight">\(\pi_{ndk} \in [0,1]\)</span> for patient <span class="math notranslate nohighlight">\(n\)</span>, drug concentration <span class="math notranslate nohighlight">\(d\)</span> and cell-subtype <span class="math notranslate nohighlight">\(k\)</span>, represented as a surviving rate of cells.</p>
+<p>The log-likelihood defining our problem, and that CLIFF aims to optimize, is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L} =  \max\limits_{\tilde{\boldsymbol{\beta}}} \sum_{n=1}^N  \sum_{d=1}^D \bigg[ y_{nd} \log\bigg( \sum_{k=1}^K w_{nk} \cdot \pi_{kd} (\tilde{\boldsymbol{\beta}}) \bigg) + ( 1 - y_{nd} ) \log \bigg(1 - \sum_{k=1}^K w_{nk} \cdot \pi_{kd} (\tilde{\boldsymbol{\beta}}) \bigg)  \bigg]\]</div>
+<p>As this log-likelihood expression contains the log of a sum, it is difficult to optimize with respect to <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>. Therefore, we use an Expectation-Maximization to iteratively define lower bound functions that we optimize with respect to <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>. The EM algorithm rely on iterating over two steps, the E-step and the M-step. During E-step, we define a new lower bound function. During M-step, we find the optimal coefficient for this lower bound function. New coefficient in turns allows to define the next lower bound function, and so on so forth. Here is a summarized description of the E/M steps:</p>
+<p><strong>E-step</strong></p>
+<p>During E-step, we define our lower bound function at step <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\mathcal{L}_B^{(t)}\)</span> by defining <span class="math notranslate nohighlight">\(q^{(0),(t)}_{ndk}\)</span> and <span class="math notranslate nohighlight">\(q^{(1),(t)}_{ndk}\)</span> using <span class="math notranslate nohighlight">\(\pi^{(t-1)}_{dk}\)</span> defined at previous step  :</p>
+<div class="math notranslate nohighlight">
+\[q^{(1),(t)}_{ndk}  = \frac{ w_{nk} \cdot \pi^{(t-1)}_{dk} }{\sum_{k=1}^K w_{nk} \cdot \pi^{(t-1)}_{dk} }\]</div>
+<div class="math notranslate nohighlight">
+\[q^{(0), (t)}_{ndk}  = \frac{ w_{nk} \cdot ( 1 - \pi^{(t-1)}_{dk}) }{\sum_{k=1}^K w_{nk} \cdot  ( 1 - \pi^{(t-1)}_{dk} ) }\]</div>
+<p>This gives us the lower bound function of the log-likelihood function, tight to it whenever <span class="math notranslate nohighlight">\(q^{(0),(t)}_{ndk\)</span> and <span class="math notranslate nohighlight">\(q^{(1),(t)}_{ndk}\)</span> satisfies the two condition above.</p>
+<p><strong>M-step</strong></p>
+<p>During M-step, we optimize the lower bound defined in E-step with respect to <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>, considering the variables <span class="math notranslate nohighlight">\(\mathbf{q}^{(0), (t)}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q}^{(0), (t)}\)</span> defined during E-step as constants. Also, the two last term of the lower bound defined above do not depend on <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>, thus we can solve the following problem which will produce the same optimal <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span> coefficients:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_B = \max\limits_{\boldsymbol{\tilde{\beta}}} \sum_{d,n}^{D,N} \sum_{k=1}^K q^{(1)}_{ndk} \cdot y_{nd} \cdot  \log( \pi_{kd} (\tilde{\boldsymbol{\beta}}_d ) ) + q^{(0)}_{ndk} \cdot (1 - y_{nd}) \cdot \log( 1 - \pi_{kd} (\tilde{\boldsymbol{\beta}}_d ) )\]</div>
+<p>Interestingly, this equation can be solved with standard libraries using a weighted logistic regression model, where we define weights as being <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}^{(1)}_{dk} = \sum_{n=1}^{N} q^{(1)}_{ndk} \cdot y_{nd}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}^{(0)}_{dk} = \sum_{n=1}^{N} q^{(0)}_{ndk} \cdot (1 - y_{nd})\)</span>.</p>
 </section>
 
 
@@ -85,7 +111,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="execution.html" class="btn btn-neutral float-left" title="Execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="results.html" class="btn btn-neutral float-right" title="Detailed methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="results.html" class="btn btn-neutral float-right" title="Examples of CLIFF results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -111,9 +137,9 @@
   </script>  
 
   <style>
-    /* Sidebar header (and topbar for mobile) */
+    /* Sidebar header (and topbar for mobile)*/
     .wy-side-nav-search, .wy-nav-top {
-      background: #ab0707;
+      background: #343131;
     }
     a:visited {
         color: #ab0707;

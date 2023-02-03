@@ -18,6 +18,8 @@
 Overview of the methods
 =======================
 
+**blabla**
+
 **CLIFF** integrates cell subtype abundance and expression with bulk drug sensitivity to infer the cell subtypes’ drug susceptibility. CLIFF relies on a new mathematical model using cell-subtype- associated latent variables, which we resolve with an Expectation-Maximization algorithm. 
 
 .. image:: images/cliff_schemes3.png

@@ -1,8 +1,7 @@
-.. _detailmethods:
+.. _results:
 
-Detailed methods
+Examples of CLIFF results
 ________________
-
 
 .. image:: ../images/cliff_schemes4.png  
 .. image:: ../images/cliff_schemes5.png  
