@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview of the methods &mdash; Cliff 0.6 documentation</title>
+  <title>Overview of CLIFF method &mdash; Cliff 0.6 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -62,7 +62,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Overview of the methods</li>
+      <li class="breadcrumb-item active">Overview of CLIFF method</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,12 +83,11 @@
 <li class="toctree-l1"><a class="reference internal" href="source/CLIFF.html">CLIFF class &amp; functions</a></li>
 </ul>
 </div>
-<section id="overview-of-the-methods">
-<h1>Overview of the methods<a class="headerlink" href="#overview-of-the-methods" title="Permalink to this heading"></a></h1>
-<p><strong>CLIFF</strong> uncovers the impact of specific cell subtypes on drug response by integrating single-cell RNA-seq and ex-vivo drug sensitivity assays. In particular, <strong>CLIFF</strong> relies on integrating cell subtype abundance and cell-type expression with bulk drug sensitivity to infer the cell subtypes’ drug susceptibility. Cell subtype abundance / expression can be measured with scRNA-seq or inferred with <a class="reference external" href="https://github.com/alexdray86/CLIMB">CLIMB</a> or any other bulk deconvolution technique.</p>
+<section id="overview-of-cliff-method">
+<h1>Overview of CLIFF method<a class="headerlink" href="#overview-of-cliff-method" title="Permalink to this heading"></a></h1>
+<p>The <strong>CLIFF</strong> method deconvolute cell subtypes drug sensitivity by integrating single-cell RNA sequencing data and ex-vivo drug sensitivity assays. For that matter, <strong>CLIFF</strong> leverages cell-subtype abundance and cell-type expression with bulk drug sensitivity to infer the drug susceptibility of individual cell subtypes. The measurement of cell-subtype abundance and expression can be accomplished through single-cell RNA sequencing or inferred through the use of techniques such as <a class="reference external" href="https://alexdray86.github.io/CLIMB/build/index.html">CLIMB</a> or other bulk deconvolution methods.</p>
 <img alt="_images/cliff_schemes3.png" src="_images/cliff_schemes3.png" />
-<p><strong>CLIFF</strong> relies on a new mathematical model using cell-subtype- associated latent variables, which we resolve with an Expectation-Maximization algorithm.</p>
-<p><a class="reference internal" href="usage/detailmethods.html#detailmethods"><span class="std std-ref">Detailed methods</span></a></p>
+<p><strong>CLIFF</strong> relies on a new mathematical model using cell-subtype- associated latent variables, which we resolve with an Expectation-Maximization algorithm. More details in <a class="reference internal" href="usage/detailmethods.html#detailmethods"><span class="std std-ref">Detailed methods</span></a>.</p>
 </section>
 
 
