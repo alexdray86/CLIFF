@@ -98,7 +98,7 @@
 \[q^{(1),(t)}_{ndk}  = \frac{ w_{nk} \cdot \pi^{(t-1)}_{dk} }{\sum_{k=1}^K w_{nk} \cdot \pi^{(t-1)}_{dk} }\]</div>
 <div class="math notranslate nohighlight">
 \[q^{(0), (t)}_{ndk}  = \frac{ w_{nk} \cdot ( 1 - \pi^{(t-1)}_{dk}) }{\sum_{k=1}^K w_{nk} \cdot  ( 1 - \pi^{(t-1)}_{dk} ) }\]</div>
-<p>This gives us the lower bound function of the log-likelihood function, tight to it whenever <span class="math notranslate nohighlight">\(q^{(0),(t)}_{ndk\)</span> and <span class="math notranslate nohighlight">\(q^{(1),(t)}_{ndk}\)</span> satisfies the two condition above.</p>
+<p>This gives us the lower bound function of the log-likelihood function, tight to it whenever <span class="math notranslate nohighlight">\(q^{(0),(t)}_{ndk}\)</span> and <span class="math notranslate nohighlight">\(q^{(1),(t)}_{ndk}\)</span> satisfies the two condition above.</p>
 <p><strong>M-step</strong></p>
 <p>During M-step, we optimize the lower bound defined in E-step with respect to <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>, considering the variables <span class="math notranslate nohighlight">\(\mathbf{q}^{(0), (t)}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q}^{(0), (t)}\)</span> defined during E-step as constants. Also, the two last term of the lower bound defined above do not depend on <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span>, thus we can solve the following problem which will produce the same optimal <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{\beta}}\)</span> coefficients:</p>
 <div class="math notranslate nohighlight">

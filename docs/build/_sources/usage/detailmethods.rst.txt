@@ -39,7 +39,7 @@ During E-step, we define our lower bound function at step :math:`t`, :math:`\mat
 
 .. math:: q^{(0), (t)}_{ndk}  = \frac{ w_{nk} \cdot ( 1 - \pi^{(t-1)}_{dk}) }{\sum_{k=1}^K w_{nk} \cdot  ( 1 - \pi^{(t-1)}_{dk} ) }
 
-This gives us the lower bound function of the log-likelihood function, tight to it whenever :math:`q^{(0),(t)}_{ndk` and :math:`q^{(1),(t)}_{ndk}` satisfies the two condition above.
+This gives us the lower bound function of the log-likelihood function, tight to it whenever :math:`q^{(0),(t)}_{ndk}` and :math:`q^{(1),(t)}_{ndk}` satisfies the two condition above.
 
 **M-step**
 
